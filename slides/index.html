@@ -497,6 +497,11 @@ table td, th {
   margin-bottom: 20px;
 }
 
+h1.title {
+  font-size: 3.25em;
+  margin-top: 1.5em;
+}
+
 h1:not(#slipshow-toc h1) {
   text-align: center;
 }
@@ -1933,10 +1938,13 @@ relevance:0},{begin:/-&gt;/}]})})();hljs.registerLanguage(&quot;ocaml&quot;,e)})
 &lt;div class=&quot;slip&quot;&gt;
 &lt;div class=&quot;slip-body&quot;&gt;
 &lt;div&gt;
-&lt;h1 id=&quot;oxcaml-safe-control-over-program-behavior&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#oxcaml-safe-control-over-program-behavior&quot;&gt;&lt;/a&gt;&lt;span&gt;OxCaml: &lt;/span&gt;&lt;em&gt;&lt;span&gt;safe control over program behavior&lt;/span&gt;&lt;/em&gt;&lt;span&gt; &lt;/span&gt;&lt;img style=&quot;position: absolute; top:0.5em;left:0.5em;rotate:-15deg;&quot; src=&quot;./assets/oxcaml-normal.svg&quot; width=&quot;150&quot; height=&quot;150&quot; /&gt;&lt;/h1&gt;
-&lt;h2 id=&quot;icfp25-tutorial&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#icfp25-tutorial&quot;&gt;&lt;/a&gt;&lt;span&gt;ICFP’25 Tutorial&lt;/span&gt;&lt;/h2&gt;
+&lt;h1 id=&quot;oxcaml-safe-control-over-program-behavior&quot; class=&quot;title&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#oxcaml-safe-control-over-program-behavior&quot;&gt;&lt;/a&gt;&lt;h1 class=&quot;title&quot;&gt;&lt;span&gt;OxCaml: &lt;/span&gt;&lt;em&gt;&lt;span&gt;safe control over program behavior&lt;/span&gt;&lt;/em&gt;&lt;/h1&gt;&lt;span&gt; &lt;/span&gt;&lt;img style=&quot;position: absolute; top:0.5em;left:0.5em;rotate:-15deg;&quot; src=&quot;./assets/oxcaml-normal.svg&quot; width=&quot;150&quot; height=&quot;150&quot; /&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;span&gt;Gavin Gray, Anil Madhavapeddy, KC Sivaramkrishnan, Richard Eisenberg, Chris Casinghino,&lt;/span&gt;
 &lt;span&gt;Will Crichton, Shriram Krishnamurthi, Patrick Ferris, Max Slater, Megan Del Vecchio, Diana Kalinichenko, Nadia Razek&lt;/span&gt;&lt;/p&gt;
+&lt;div style=&quot;display: flex; justify-content: right; align-items: start; margin-top: 2em;&quot;&gt;
+  &lt;em&gt;While we get set up, tell us why you're here!&lt;/em&gt;
+  &lt;img src=&quot;./assets/interest-quiz-qrcode.svg&quot; width=&quot;25%&quot; height=&quot;25%&quot; /&gt;
+&lt;/div&gt;
 &lt;div up-at-unpause pause&gt;&lt;/div&gt;
 &lt;h2 id=&quot;oxcaml-provides&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#oxcaml-provides&quot;&gt;&lt;/a&gt;&lt;span&gt;OxCaml provides&lt;/span&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;&lt;span&gt;Safe control&lt;/span&gt;&lt;/em&gt;&lt;span&gt; over performance-critical aspects of program behavior, &lt;/span&gt;&lt;em&gt;&lt;span&gt;in OCaml&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
@@ -2009,15 +2017,15 @@ slip.setClass(el, &quot;wrong&quot;, true)&lt;/script&gt;
 &lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;A value is &lt;/span&gt;&lt;code&gt;@ local&lt;/code&gt;&lt;span&gt; if it doesn’t escape the current region&lt;/span&gt;&lt;/p&gt;
 &lt;div pause&gt;&lt;/div&gt;
-&lt;p&gt;&lt;span&gt;A value &lt;/span&gt;&lt;code&gt;@ local&lt;/code&gt;&lt;span&gt; &lt;/span&gt;&lt;em&gt;&lt;span&gt;could be locally allocated&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;A value &lt;/span&gt;&lt;code&gt;@ local&lt;/code&gt;&lt;span&gt; &lt;/span&gt;&lt;em&gt;&lt;span&gt;could be stack allocated&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;div up-at-unpause pause&gt;&lt;/div&gt;
-&lt;h2 id=&quot;oxcaml-local-allocation&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#oxcaml-local-allocation&quot;&gt;&lt;/a&gt;&lt;span&gt;OxCaml Local Allocation&lt;/span&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;oxcaml-stack-allocation&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#oxcaml-stack-allocation&quot;&gt;&lt;/a&gt;&lt;span&gt;OxCaml Stack Allocation&lt;/span&gt;&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&quot;language-ocaml&quot;&gt;let perf_critical () = 
   let symbols @ local = [| gensym (); gensym () |] in
   ...
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;span&gt;We assert that &lt;/span&gt;&lt;code&gt;symbols&lt;/code&gt;&lt;span&gt; is local and doesn’t escape the current region&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;span&gt;How can we ensure that it’s locally allocated?&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;span&gt;How can we ensure that it’s stack allocated?&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;OxCaml provides new keywords for allocation: &lt;/span&gt;&lt;code&gt;stack_&lt;/code&gt;&lt;span&gt; and &lt;/span&gt;&lt;code&gt;exclave_&lt;/code&gt;&lt;/p&gt;
 &lt;div pause&gt;&lt;/div&gt;
@@ -2027,9 +2035,9 @@ slip.setClass(el, &quot;wrong&quot;, true)&lt;/script&gt;
   ...
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div pause&gt;&lt;/div&gt;
-&lt;p&gt;&lt;span&gt;This turns the allocation site for &lt;/span&gt;&lt;code&gt;[| |]&lt;/code&gt;&lt;span&gt; into a &lt;/span&gt;&lt;em&gt;&lt;span&gt;local allocation.&lt;/span&gt;&lt;/em&gt;&lt;span&gt; &lt;/span&gt;&lt;span pause&gt;&lt;/span&gt;&lt;span&gt; &lt;/span&gt;&lt;code&gt;stack_&lt;/code&gt;&lt;span&gt; usages are inserted automatically by OxCaml when possible&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;This turns the allocation site for &lt;/span&gt;&lt;code&gt;[| |]&lt;/code&gt;&lt;span&gt; into a &lt;/span&gt;&lt;em&gt;&lt;span&gt;stack allocation.&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;div center-at-unpause pause&gt;&lt;/div&gt;
-&lt;h4 id=&quot;the-local-region&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#the-local-region&quot;&gt;&lt;/a&gt;&lt;span&gt;The Local Region&lt;/span&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;the-local-region-stack-allocation&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#the-local-region-stack-allocation&quot;&gt;&lt;/a&gt;&lt;span&gt;The Local Region (&amp;quot;Stack Allocation&amp;quot;)&lt;/span&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;span&gt;The local region is still dynamically sized, but not GC managed. It's cleaned up on function exit&lt;/span&gt;&lt;/p&gt;
 &lt;div style=&quot;position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 1em;&quot;&gt;
 &lt;pre&gt;&lt;code class=&quot;language-ocaml&quot;&gt;let perf_critical () = 
@@ -2069,7 +2077,7 @@ slip.setClass(el, &quot;wrong&quot;, true)&lt;/script&gt;
 &lt;pre&gt;&lt;code class=&quot;language-ocaml&quot;&gt;val gensym : unit -&amp;gt; string @ global
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div pause&gt;&lt;/div&gt;
-&lt;p&gt;&lt;span&gt;Local allocation requires cooperation from &lt;/span&gt;&lt;em&gt;&lt;span&gt;all callees!&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;Stack allocation requires cooperation from &lt;/span&gt;&lt;em&gt;&lt;span&gt;all callees!&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;div up-at-unpause pause&gt;&lt;/div&gt;
 &lt;h3 id=&quot;using-exclave_&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#using-exclave_&quot;&gt;&lt;/a&gt;&lt;span&gt;Using &lt;/span&gt;&lt;code&gt;exclave_&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;span&gt;We may want to use a helper function to create the array&lt;/span&gt;&lt;/p&gt;
@@ -2273,6 +2281,7 @@ let perf_critical () =
 &lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Every mode axis has a default value for backwards compatibility with OCaml&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span&gt;The default for locality is the &lt;/span&gt;&lt;code&gt;global&lt;/code&gt;&lt;span&gt; mode. Default modes are bolded in the provided tables&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;remark&quot; down-at-unpause pause&gt;&lt;span&gt;Modes are &lt;/span&gt;&lt;em&gt;&lt;span&gt;inferred&lt;/span&gt;&lt;/em&gt;&lt;span&gt; by OxCaml, so allocations can be optimized to the stack without explicitly annotating with &lt;/span&gt;&lt;code&gt;stack_&lt;/code&gt;&lt;span&gt;.&lt;/span&gt;&lt;/p&gt;
 &lt;div up-at-unpause pause&gt;&lt;/div&gt;
 &lt;h3 id=&quot;mode-crossing-when-modes-and-types-work-together&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#mode-crossing-when-modes-and-types-work-together&quot;&gt;&lt;/a&gt;&lt;span&gt;Mode Crossing: When Modes and Types Work Together&lt;/span&gt;&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&quot;language-ocaml&quot;&gt;let genint =
@@ -2290,7 +2299,7 @@ let perf_critical () =
 &lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Locality property: local values don’t escape the region&lt;/span&gt;&lt;/p&gt;
 &lt;div pause&gt;&lt;/div&gt;
-&lt;p&gt;&lt;span&gt;In other words, &lt;/span&gt;&lt;em&gt;&lt;span&gt;locally allocated&lt;/span&gt;&lt;/em&gt;&lt;span&gt; values don’t escape the region&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;In other words, &lt;/span&gt;&lt;em&gt;&lt;span&gt;stack allocated&lt;/span&gt;&lt;/em&gt;&lt;span&gt; values don’t escape the region&lt;/span&gt;&lt;/p&gt;
 &lt;p class=&quot;theorem&quot;&gt;&lt;span&gt;If a type upholds the properties of a mode axis, values of that type mode cross&lt;/span&gt;&lt;/p&gt;
 &lt;div up-at-unpause pause&gt;&lt;/div&gt;
 &lt;h1 id=&quot;example-2-safe-parallelism&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#example-2-safe-parallelism&quot;&gt;&lt;/a&gt;&lt;span&gt;Example 2: Safe Parallelism&lt;/span&gt;&lt;/h1&gt;
@@ -2515,15 +2524,17 @@ expected to be uncontended.
 &lt;div up-at-unpause pause&gt;&lt;/div&gt;
 &lt;h1 id=&quot;activity&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#activity&quot;&gt;&lt;/a&gt;&lt;span&gt;Activity!&lt;/span&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;span&gt;We’ve prepared a short activity to help you gauge your understanding of OxCaml&lt;/span&gt;&lt;/p&gt;
-&lt;div style=&quot;display: grid; place-items: center;&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://tinyurl.com/oxcaml-icfp25-activity&quot;&gt;&lt;code&gt;tinyurl.com/oxcaml-icfp25-activity&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div style=&quot;display:flex; align-items: center; justify-content: center;&quot;&gt;
+  &lt;figure style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;./assets/activity-1-qrcode.svg&quot; width=&quot;75%&quot;/&gt;
+    &lt;figcaption&gt;&lt;a href=&quot;https://tinyurl.com/oxcaml-wrkshp-activity&quot;&gt;&lt;code&gt;tinyurl.com/oxcaml-wrkshp-activity&lt;/code&gt;&lt;/a&gt;&lt;/figcaption&gt;
+  &lt;/figure&gt;
 &lt;/div&gt;
 &lt;div up-at-unpause pause&gt;&lt;/div&gt;
 &lt;h1 id=&quot;oxcaml-summary&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#oxcaml-summary&quot;&gt;&lt;/a&gt;&lt;span&gt;OxCaml Summary &lt;/span&gt;&lt;img style=&quot;float: right;&quot; src=&quot;./assets/oxcaml-normal.svg&quot; width=&quot;200px&quot; height=&quot;200px&quot; /&gt;&lt;/h1&gt;
-&lt;div class=&quot;remark&quot;&gt;
-&lt;p&gt;&lt;em&gt;&lt;span&gt;Continue learning with ...&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span&gt;programming activities: &lt;/span&gt;&lt;a href=&quot;https://github.com/oxcaml/tutorial-icfp25&quot;&gt;&lt;code&gt;github.com/oxcaml/tutorial-icfp25&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span&gt;the documentation: &lt;/span&gt;&lt;a href=&quot;https://oxcaml.org/documentation/&quot;&gt;&lt;code&gt;oxcaml.org/documentation/&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;remark&quot; title=&quot;Continue learning with ...&quot;&gt;
+&lt;p&gt;&lt;span&gt;Programming activities: &lt;/span&gt;&lt;a href=&quot;https://github.com/oxcaml/tutorial-icfp25&quot;&gt;&lt;code&gt;github.com/oxcaml/tutorial-icfp25&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;Documentation: &lt;/span&gt;&lt;a href=&quot;https://oxcaml.org/documentation/&quot;&gt;&lt;code&gt;oxcaml.org/documentation/&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;span&gt;OxCaml provides &lt;/span&gt;&lt;em&gt;&lt;span&gt;safe control&lt;/span&gt;&lt;/em&gt;&lt;span&gt; over performance-critical aspects of program behavior&lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;

@@ -1,9 +1,14 @@
-# OxCaml: *safe control over program behavior* <img style="position: absolute; top:0.5em;left:0.5em;rotate:-15deg;" src="./assets/oxcaml-normal.svg" width="150" height="150" />
-
-## ICFP’25 Tutorial
+{.title}
+# <h1 class="title">OxCaml: *safe control over program behavior*</h1> <img style="position: absolute; top:0.5em;left:0.5em;rotate:-15deg;" src="./assets/oxcaml-normal.svg" width="150" height="150" />
 
 Gavin Gray, Anil Madhavapeddy, KC Sivaramkrishnan, Richard Eisenberg, Chris Casinghino,
 Will Crichton, Shriram Krishnamurthi, Patrick Ferris, Max Slater, Megan Del Vecchio, Diana Kalinichenko, Nadia Razek
+
+<div style="display: flex; justify-content: right; align-items: start; margin-top: 2em;">
+  <em>While we get set up, tell us why you're here!</em>
+
+  <img src="./assets/interest-quiz-qrcode.svg" width="25%" height="25%" />
+</div>
 
 {pause up}
 
@@ -107,11 +112,11 @@ A value is `@ local` if it doesn’t escape the current region
 
 {pause}
 
-A value `@ local` *could be locally allocated*
+A value `@ local` *could be stack allocated*
 
 {pause up}
 
-## OxCaml Local Allocation
+## OxCaml Stack Allocation
 
 ```ocaml
 let perf_critical () = 
@@ -121,7 +126,7 @@ let perf_critical () =
 
 We assert that `symbols` is local and doesn’t escape the current region
 
-*How can we ensure that it’s locally allocated?*
+*How can we ensure that it’s stack allocated?*
 
 {pause}
 
@@ -139,11 +144,11 @@ let perf_critical () =
 
 {pause}
 
-This turns the allocation site for `[| |]` into a *local allocation.* {pause} `stack_` usages are inserted automatically by OxCaml when possible
+This turns the allocation site for `[| |]` into a *stack allocation.*
 
 {pause center}
 
-#### The Local Region
+#### The Local Region ("Stack Allocation")
 
 The local region is still dynamically sized, but not GC managed. It's cleaned up on function exit
 
@@ -204,7 +209,7 @@ val gensym : unit -> string @ global
 
 {pause}
 
-Local allocation requires cooperation from *all callees!*
+Stack allocation requires cooperation from *all callees!*
 
 {pause up}
 
@@ -501,6 +506,9 @@ Every mode axis has a default value for backwards compatibility with OCaml
 
 The default for locality is the `global` mode. Default modes are bolded in the provided tables
 
+{pause down .remark}
+Modes are *inferred* by OxCaml, so allocations can be optimized to the stack without explicitly annotating with `stack_`.
+
 {pause up}
 
 ### Mode Crossing: When Modes and Types Work Together
@@ -526,7 +534,7 @@ Locality property: local values don’t escape the region
 
 {pause}
 
-In other words, *locally allocated* values don’t escape the region
+In other words, *stack allocated* values don’t escape the region
 
 {.theorem}
 If a type upholds the properties of a mode axis, values of that type mode cross
@@ -837,22 +845,21 @@ let gensym =
 
 We’ve prepared a short activity to help you gauge your understanding of OxCaml
 
-<div style="display: grid; place-items: center;">
-
-[`tinyurl.com/oxcaml-icfp25-activity`](https://tinyurl.com/oxcaml-icfp25-activity)
-
+<div style="display:flex; align-items: center; justify-content: center;">
+  <figure style="text-align: center;">
+    <img src="./assets/activity-1-qrcode.svg" width="75%"/>
+    <figcaption><a href="https://tinyurl.com/oxcaml-wrkshp-activity"><code>tinyurl.com/oxcaml-wrkshp-activity</code></a></figcaption>
+  </figure>
 </div>
 
 {pause up}
 
 # OxCaml Summary <img style="float: right;" src="./assets/oxcaml-normal.svg" width="200px" height="200px" />
 
-{.remark}
-> *Continue learning with ...*
+{.remark title="Continue learning with ..."}
+> Programming activities: [`github.com/oxcaml/tutorial-icfp25`](https://github.com/oxcaml/tutorial-icfp25)
 >
-> programming activities: [`github.com/oxcaml/tutorial-icfp25`](https://github.com/oxcaml/tutorial-icfp25)
->
-> the documentation: [`oxcaml.org/documentation/`](https://oxcaml.org/documentation/)
+> Documentation: [`oxcaml.org/documentation/`](https://oxcaml.org/documentation/)
 
 OxCaml provides *safe control* over performance-critical aspects of program behavior
 

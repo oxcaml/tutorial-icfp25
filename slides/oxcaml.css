@@ -184,6 +184,11 @@ table td, th {
   margin-bottom: 20px;
 }
 
+h1.title {
+  font-size: 3.25em;
+  margin-top: 1.5em;
+}
+
 h1:not(#slipshow-toc h1) {
   text-align: center;
 }
