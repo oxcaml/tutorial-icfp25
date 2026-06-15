@@ -36,7 +36,11 @@
 }
 
 :root {
-    font-size: 2em;
+    font-size: 1.9em;
+}
+
+h1, h2, h3 {
+  margin: 0;
 }
 
 body {
@@ -75,7 +79,11 @@ table td, th {
   padding-right: 1em;
 }
 
-#contention-portability-container { }
+#contention-portability-container:not(.cont-port-container) {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
 
 .cont-port-container {
   display: grid;
@@ -90,14 +98,12 @@ table td, th {
 }
 
 .does-not-compile {
-
   pre&, pre {
     position: relative;
   }
 
   code&, code {
     border: 2px solid #FF43A4;
-
     &.language-ocaml::after {
       position: absolute; top: -2em; right: 0;
       content: url(assets/oxcaml.svg);
@@ -185,12 +191,30 @@ table td, th {
 }
 
 h1.title {
-  font-size: 3.25em;
-  margin-top: 1.5em;
+  font-size: 3em;
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 1.25em;
+    left: 0.0em;
+    rotate: -15deg;
+  }
 }
 
 h1:not(#slipshow-toc h1) {
   text-align: center;
+}
+
+#values-container {
+  [stroke="#008a0e"]:not(.visible),
+  [fill="#008a0e"]:not(.visible),
+  [stroke="#1071e5"]:not(.visible),
+  [fill="#1071e5"]:not(.visible) {
+    visibility: hidden;
+  }
 }
 
 /*************************************/
