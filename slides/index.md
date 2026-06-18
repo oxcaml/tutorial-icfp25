@@ -296,11 +296,11 @@ let gensym_2 () =
 {pause}
 
 {carousel #carousel-memory}
->> <img src="./assets/symbols-to-callers-local-1.svg" width="50%" />
+>> <img src="./assets/symbols-to-callers-local-1.svg" width="60%" />
 > {change-page=carousel-memory}
->> <img src="./assets/symbols-to-callers-local-2.svg" width="50%" />
+>> <img src="./assets/symbols-to-callers-local-2.svg" width="60%" />
 
-{pause}
+{pause center}
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em">
 
@@ -544,14 +544,12 @@ If a type upholds the properties of a mode axis, values of that type mode cross
 
 {#sig-plain}
 ```ocaml
-let with_file : string -> (Unix.file_descr -> 'a) -> 'a
-  = (* elided *)
+val with_file : string -> (Unix.file_descr -> 'a) -> 'a
 ```
 
 {#sig-local .unstatic}
 ```ocaml
-let with_file : string -> (Unix.file_descr @ local -> 'a) -> 'a
-  = (* elided *)
+val with_file : string -> (Unix.file_descr @ local -> 'a) -> 'a
 ```
 
 {pause}
