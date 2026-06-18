@@ -31,7 +31,7 @@ let gensym_pair par =
 
 (* Run parallel computation *)
 let run_parallel ~f =
-  let module Scheduler = Parallel_scheduler_work_stealing in
+  let module Scheduler = Parallel_scheduler in
   let scheduler = Scheduler.create () in
   let result = Scheduler.parallel scheduler ~f in
   Scheduler.stop scheduler;

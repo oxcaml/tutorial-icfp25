@@ -255,12 +255,12 @@ Since each task can only access a separate portion of the array&mdash;and the
 slices are `local`, so don't escape&mdash;this is safe.
 
 To run our parallel quicksort, we need to get an implementation of parallelism
-from a scheduler.  For example, using `Parallel_scheduler_work_stealing`:
+from a scheduler.  For example, using `Parallel_scheduler`:
 
 ```ocaml
 let quicksort ~scheduler ~mutex array =
     let monitor = Parallel.Monitor.create_root () in
-    Parallel_scheduler_work_stealing.schedule scheduler ~monitor ~f:(fun parallel ->
+    Parallel_scheduler.schedule scheduler ~monitor ~f:(fun parallel ->
         let array = Par_array.of_array array in
 (*                                     ^^^^^               *)
 (* This value is contended but expected to be uncontended. *)
@@ -275,7 +275,7 @@ assures that our caller is not mutating it in parallel.
 ```ocaml
 let quicksort ~scheduler ~mutex array =
   let monitor = Parallel.Monitor.create_root () in
-  Parallel_scheduler_work_stealing.schedule scheduler ~monitor ~f:(fun parallel ->
+  Parallel_scheduler.schedule scheduler ~monitor ~f:(fun parallel ->
       Capsule.Mutex.with_lock mutex ~f:(fun password ->
         Capsule.Data.iter array ~password ~f:(fun array ->
           let array = Par_array.of_array array in
@@ -369,7 +369,7 @@ page](../../parallelism/02-capsules).
 ```ocaml
 let filter ~scheduler ~mutex image =
   let monitor = Parallel.Monitor.create_root () in
-  Parallel_scheduler_work_stealing.schedule scheduler ~monitor ~f:(fun parallel ->
+  Parallel_scheduler.schedule scheduler ~monitor ~f:(fun parallel ->
     (* Note [project] produces a contended image *)
     let width = Image.width (Capsule.Data.project image) in
     let height = Image.height (Capsule.Data.project image) in
@@ -429,7 +429,7 @@ input, but that's perfectly fine here.
 ```ocaml
 let filter ~scheduler ~key image =
   let monitor = Parallel.Monitor.create_root () in
-  Parallel_scheduler_work_stealing.schedule scheduler ~monitor ~f:(fun parallel ->
+  Parallel_scheduler.schedule scheduler ~monitor ~f:(fun parallel ->
     let width = Image.width (Capsule.Data.project image) in
     let height = Image.height (Capsule.Data.project image) in
     let pixels = width * height in

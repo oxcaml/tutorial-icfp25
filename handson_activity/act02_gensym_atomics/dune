@@ -1,3 +1,3 @@
 (executables
  (names gensym_atomics)
- (libraries parallel parallel.scheduler.work_stealing))
+ (libraries parallel parallel.scheduler))

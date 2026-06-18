@@ -267,7 +267,7 @@ of parallelism. It is also passed to the tasks so that they can spawn sub-tasks.
 To run `add4`, we need to get our hands on a *scheduler,* a component that takes
 in all the tasks that we want to run, decides how to dole them out into domains,
 and tracks who is waiting for what to be computed. Each scheduler is provided by
-a library. For this tutorial, we'll use `parallel.scheduler.work_stealing`,
+a library. For this tutorial, we'll use `parallel.scheduler`,
 which implements the popular [work-stealing] strategy.
 
 [work-stealing]: https://en.wikipedia.org/wiki/Work_stealing
@@ -281,7 +281,7 @@ for details).
 let test_add4 par = add4 par 1 10 100 1000
 
 let run_one_test ~(f : Parallel.t @ local -> 'a) : 'a =
-  let module Scheduler = Parallel_scheduler_work_stealing in
+  let module Scheduler = Parallel_scheduler in
   let scheduler = Scheduler.create () in
   let monitor = Parallel.Monitor.create_root () in
   let result = Scheduler.schedule scheduler ~monitor ~f in
@@ -302,7 +302,7 @@ This uses a work-stealing scheduler, but you can also use the `parallel`
 library's own `Parallel.Scheduler.Sequential`, which simply runs everything on
 the primary domain. This is handy for testing or debugging when you want to
 eliminate nondeterminism. To do so, simply replace
-`Parallel_scheduler_work_stealing` with `Parallel.Scheduler.Sequential` in
+`Parallel_scheduler` with `Parallel.Scheduler.Sequential` in
 `run_one_test`.
 
 ## Averaging over binary trees
